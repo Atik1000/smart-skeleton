@@ -128,6 +128,27 @@ if (Skeleton.isActive(element)) {
 }
 ```
 
+## 🔄 Nested Elements & Deep Traversal
+
+Smart-skeleton handles **complex nested structures** automatically:
+
+```javascript
+// Deeply nested dashboard with 8+ levels
+Skeleton.apply(dashboard, {
+  deep: true,        // Enable recursive processing
+  maxDepth: 8,       // Handle up to 8 levels deep
+  randomize: true
+});
+```
+
+**Preserves:**
+- ✅ Flexbox layouts (direction, gap, wrap)
+- ✅ CSS Grid layouts (columns, rows, gap)  
+- ✅ Padding, margin, border-radius
+- ✅ Container structure and spacing
+
+**[See full nested elements guide →](./docs/NESTED_ELEMENTS.md)**
+
 ## 🎨 Themes
 
 ### Light Theme (Default)
