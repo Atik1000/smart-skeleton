@@ -1,0 +1,37 @@
+{
+  "name": "smart-skeleton",
+  "version": "1.0.0",
+  "description": "Automatically generate skeleton loaders based on any DOM element's existing layout",
+  "main": "dist/smart-skeleton.cjs.js",
+  "module": "dist/smart-skeleton.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "styles"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "skeleton",
+    "loader",
+    "loading",
+    "placeholder",
+    "shimmer",
+    "ui",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8",
+    "vite-plugin-dts": "^3.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smart-skeleton.git"
+  }
+}
