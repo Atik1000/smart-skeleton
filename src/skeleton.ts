@@ -336,10 +336,16 @@ class SkeletonClass {
     // Add container class to maintain layout
     element.classList.add('smart-skeleton-container');
 
-    // Process children recursively
+    // Process children recursively using DocumentFragment for better performance
     const children = Array.from(element.children) as HTMLElement[];
-    for (const child of children) {
-      this.processElement(child, options, depth + 1);
+    
+    // Process in batches for better performance with many children
+    const batchSize = 20;
+    for (let i = 0; i < children.length; i += batchSize) {
+      const batch = children.slice(i, i + batchSize);
+      batch.forEach(child => {
+        this.processElement(child, options, depth + 1);
+      });
     }
   }
 

@@ -37,6 +37,17 @@ setTimeout(() => {
 }, 2000);
 ```
 
+## 🎯 Framework Integration
+
+**Full integration guides available:**
+
+- **[React](./docs/REACT.md)** - Hooks, components, and best practices
+- **[Next.js](./docs/NEXTJS.md)** - App Router, Pages Router, and SSR
+- **[Vue.js](./docs/VUE.md)** - Composition API, Options API, and composables
+- **[Svelte](./docs/SVELTE.md)** - Reactive statements, stores, and SvelteKit
+
+Works seamlessly with any framework! ✨
+
 ## 📖 API Reference
 
 ### `Skeleton.apply(element, options)`

@@ -223,10 +223,86 @@ export function shouldSkipElement(element: HTMLElement): boolean {
     return true;
   }
   
-  // Skip very small elements
+  // Skip very small elements (but be more lenient)
   const width = parseFloat(computed.width);
   const height = parseFloat(computed.height);
-  if (width < 10 || height < 10) {
+  if (width < 5 || height < 5) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Check if element is a container that should preserve its structure
+ */
+export function isStructuralContainer(element: HTMLElement): boolean {
+  const computed = window.getComputedStyle(element);
+  const tagName = element.tagName.toLowerCase();
+  
+  // Flex and grid containers
+  if (computed.display === 'flex' || 
+      computed.display === 'inline-flex' ||
+      computed.display === 'grid' ||
+      computed.display === 'inline-grid') {
+    return true;
+  }
+  
+  // Common structural elements
+  const structuralTags = ['div', 'section', 'article', 'aside', 'main', 'header', 'footer', 'nav', 'ul', 'ol', 'li'];
+  if (structuralTags.includes(tagName) && element.children.length > 0) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Get all nested elements up to a certain depth
+ */
+export function getAllNestedElements(
+  root: HTMLElement,
+  maxDepth: number = 10
+): HTMLElement[] {
+  const elements: HTMLElement[] = [];
+  
+  function traverse(element: HTMLElement, depth: number) {
+    if (depth > maxDepth || shouldSkipElement(element)) {
+      return;
+    }
+    
+    elements.push(element);
+    
+    Array.from(element.children).forEach(child => {
+      if (child instanceof HTMLElement) {
+        traverse(child, depth + 1);
+      }
+    });
+  }
+  
+  traverse(root, 0);
+  return elements;
+}
+
+/**
+ * Check if element has significant content
+ */
+export function hasSignificantContent(element: HTMLElement): boolean {
+  // Check for text content
+  const textContent = element.textContent?.trim();
+  if (textContent && textContent.length > 0) {
+    return true;
+  }
+  
+  // Check for images or media
+  const hasMedia = element.querySelector('img, video, canvas, svg, iframe');
+  if (hasMedia) {
+    return true;
+  }
+  
+  // Check for form elements
+  const hasFormElements = element.querySelector('input, textarea, select, button');
+  if (hasFormElements) {
     return true;
   }
   
